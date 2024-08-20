@@ -2,19 +2,22 @@ package com.example.projectmanagementsystem.project_management_system.service;
 
 
 import com.example.projectmanagementsystem.project_management_system.config.AuthController;
+import com.example.projectmanagementsystem.project_management_system.model.Task;
 import com.example.projectmanagementsystem.project_management_system.model.User;
 import com.example.projectmanagementsystem.project_management_system.repository.UserJpaRepository;
 import com.example.projectmanagementsystem.project_management_system.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class UserJpaService implements UserRepository {
@@ -65,6 +68,53 @@ public class UserJpaService implements UserRepository {
         Map<String, String> response = new HashMap<>();
         response.put("message", "User successfully registered");
         return response;
+    }
+
+    @Override
+    public ResponseEntity<User> getUserById(UUID userId) {
+        try {
+            User user = userJpaRepository.findById(userId).get();
+            return ResponseEntity.ok(user);
+
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid User Id");
+        }
+    }
+
+
+    @Override
+    public  ResponseEntity<User> updateUserById(UUID userId, User user){
+        try {
+            User existingUser = userJpaRepository.findById(userId).get();
+            existingUser.setName(user.getName());
+            existingUser.setUsername(user.getUsername());
+            existingUser.setRole(user.getRole());
+            existingUser.setGender(user.getGender());
+            existingUser.setProjects(user.getProjects());
+
+            userJpaRepository.save(existingUser);
+            return ResponseEntity.ok(existingUser);
+
+
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Task Data");
+        }
+    }
+
+
+    @Override
+    public ResponseEntity<String> deleteUserById(UUID userId){
+        try {
+            userJpaRepository.deleteById(userId);
+            return ResponseEntity.ok("User Deleted Successfully");
+
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid User Id");
+        }
+    }
+
+    public Optional<User> getUserByUsername(String username) {
+        return userJpaRepository.findByUsername(username);
     }
 
 }

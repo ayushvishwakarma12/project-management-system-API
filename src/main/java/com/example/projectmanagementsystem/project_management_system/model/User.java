@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -34,6 +35,10 @@ public class User {
 
     @ManyToMany(mappedBy = "teamMembers")
     private List<Project> projects;
+
+    @OneToMany(mappedBy = "assignTo", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("assignTo")
+    private Set<Task> tasks;
 
     public User(UUID id, String name, String username, String password, String role, List<Project> projects) {
         this.id = id;

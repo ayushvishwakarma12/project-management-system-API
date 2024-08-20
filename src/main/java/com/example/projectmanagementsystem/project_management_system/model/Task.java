@@ -1,6 +1,5 @@
 package com.example.projectmanagementsystem.project_management_system.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -23,20 +22,29 @@ public class Task {
     @Column(name = "status")
     private TaskStatus status;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "priority", nullable = false)
+    private TaskPriority priority;
 
-    @ManyToOne
-    @JoinColumn(name = "project_id", nullable = false)
-    @JsonIgnoreProperties("tasks")
-    private Project project;
+
+//    @ManyToOne
+//    @JoinColumn(name = "project_id", nullable = false)
+//    @JsonIgnoreProperties("tasks")
+//    private Project project;
+
+    //@ManyToOne
+    @Column(name = "user_id")
+    private UUID assignTo;
 
     public Task() {}
 
-    public Task(UUID id, String title, String description, TaskStatus status, Project project) {
+    public Task(UUID id, String title, String description, TaskStatus status, UUID assignTo, TaskPriority priority) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.status = status;
-        this.project = project;
+        this.assignTo = assignTo;
+        this.priority = priority;
     }
 
     public UUID getId() {
@@ -71,18 +79,40 @@ public class Task {
         this.status = status;
     }
 
-    public Project getProject() {
-        return project;
+//    public Project getProject() {
+//        return project;
+//    }
+//
+//    public void setProject(Project project) {
+//        this.project = project;
+//    }
+
+    public UUID getAssignTo() {
+        return this.assignTo;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setAssignTo(UUID assignTo) {
+        this.assignTo = assignTo;
+    }
+
+    public TaskPriority getPriority() {
+        return this.priority;
+    }
+
+    public void setPriority(TaskPriority priority) {
+        this.priority = priority;
     }
 
     public enum TaskStatus {
         TO_DO,
         IN_PROGRESS,
-        DONE
+        COMPLETED
+    }
+
+    public enum TaskPriority {
+        LOW,
+        MEDIUM,
+        HIGH
     }
 
 }

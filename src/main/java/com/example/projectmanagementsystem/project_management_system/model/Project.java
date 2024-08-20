@@ -2,7 +2,9 @@ package com.example.projectmanagementsystem.project_management_system.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -11,7 +13,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "project")
-@JsonIgnoreProperties({"teamMembers"})
+//@JsonIgnoreProperties({"teamMembers"})
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,6 +37,7 @@ public class Project {
 
     @ManyToOne
     @JoinColumn(name = "manager_id", nullable = false)
+    @JsonDeserialize(using = UserDeserializer.class)
     private User manager;
 
     @ManyToMany
@@ -43,15 +46,16 @@ public class Project {
             joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-
+    //@JsonManagedReference
     private List<User> teamMembers;
-
-    @OneToMany(mappedBy = "project")
-    private List<Task> tasks;
+//
+//    @OneToMany(mappedBy = "project")
+//    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+//    private List<Task> tasks;
 
     public Project() {}
 
-    public Project(UUID id, String projectName, String description, LocalDate startDate, LocalDate endDate, ProjectStatus status, User manager, List<User> teamMembers, List<Task> tasks) {
+    public Project(UUID id, String projectName, String description, LocalDate startDate, LocalDate endDate, ProjectStatus status, User manager, List<User> teamMembers) {
         this.id = id;
         this.projectName = projectName;
         this.description = description;
@@ -60,7 +64,7 @@ public class Project {
         this.status = status;
         this.manager = manager;
         this.teamMembers = teamMembers;
-        this.tasks = tasks;
+
     }
 
     public UUID getId() {
@@ -127,13 +131,13 @@ public class Project {
         this.teamMembers = teamMembers;
     }
 
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
-    }
+//    public List<Task> getTasks() {
+//        return tasks;
+//    }
+//
+//    public void setTasks(List<Task> tasks) {
+//        this.tasks = tasks;
+//    }
 
     public enum ProjectStatus {
         PLANNING,
