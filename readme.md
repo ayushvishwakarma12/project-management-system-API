@@ -129,10 +129,10 @@ To get a local copy of the project up and running, follow this step
 
 4. Build and run the application:
 - Using Maven:
-  ```bash
-  ./mvnw clean install
-  ./mvnw spring-boot:run
-  ```
+```bash
+./mvnw clean install
+./mvnw spring-boot:run
+```
 
 ## Authentication
 
