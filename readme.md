@@ -30,43 +30,44 @@ The project is organized into the following folders:
   GET /api/projects
 
 - **Add a Project**
-- ```http
+  ```http
   POST /api/projects
+  ```
 
 - **Get Project By ID**
-- ```http
+  ```http
   POST /api/projects/{projectId}
-
+  ```
 - **Update Project By ID**
-- ```http
+  ```http
   PUT /api/projects/{projectId}
-
+  ```
 - **Delete Project By ID**
-- ```http
+  ```http
   DELETE /api/projects/{projectId}
-
+  ```
 ### TaskController
 
 - **Get All Tasks**
   ```http
   GET /api/tasks
-
+  ```
 - **Add a Task**
-- ```http
+  ```http
   POST /api/tasks
-
+  ```
 - **Get Task By ID**
-- ```http
+  ```http
   POST /api/tasks/{taskId}
-
+  ```
 - **Update Task By ID**
-- ```http
+  ```http
   PUT /api/tasks/{projectId}
-
+  ```
 - **Delete Task By ID**
-- ```http
+  ```http
   DELETE /api/tasks/{projectId}
-
+  ```
 ### UserController
 
 - **Get Logged-In User**
@@ -78,16 +79,17 @@ The project is organized into the following folders:
   ```http
   GET /api/users/
   ```
-
+  
 - **Register User**
   ```http
-    POST /api/signup
+  POST /api/signup
   ```
-
+  
 - **Get User By ID**
   ```http
-    POST /api/users/{userId}
+  POST /api/users/{userId}
   ```
+  
 - **Get User By Username**
   ```http
   GET /api/username/{username}
@@ -95,11 +97,12 @@ The project is organized into the following folders:
 
 - **Update User By ID**
   ```http
-    PUT /api/users/{userId}
+  PUT /api/users/{userId}
   ```
+  
 - **Delete User By ID**
   ```http
-    DELETE /api/users/{userId}
+  DELETE /api/users/{userId}
   ```
 ##  Getting Started
 
