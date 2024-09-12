@@ -115,24 +115,24 @@ To get a local copy of the project up and running, follow this step
 
 ### Installation
 1. Clone the repository:
-```http
-git clone https://github.com/ayushvishwakarma12/project-management-system-api.git
-```
+  ```bash
+  git clone https://github.com/ayushvishwakarma12/project-management-system-api.git
+  ```
 
 2. Navigate into the project directory:
-```http
-cd project-management-system-api
-```
+  ```bash
+  cd project-management-system-api
+  ```
 
 3. Configure the application properties:
 - Update the src/main/resources/application.properties file with your database credentials and other necessary configurations.
 
 4. Build and run the application:
 - Using Maven:
-```http
-./mvnw clean install
-./mvnw spring-boot:run
-```
+  ```bash
+  ./mvnw clean install
+  ./mvnw spring-boot:run
+  ```
 
 ## Authentication
 
