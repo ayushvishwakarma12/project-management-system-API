@@ -72,31 +72,35 @@ The project is organized into the following folders:
 - **Get Logged-In User**
   ```http
   GET /api/users/current-user
+  ```
 
 - **Get All Users**
   ```http
   GET /api/users/
+  ```
 
 - **Register User**
-- ```http
-  POST /api/signup
+  ```http
+    POST /api/signup
+  ```
 
 - **Get User By ID**
-- ```http
-  POST /api/users/{userId}
-
+  ```http
+    POST /api/users/{userId}
+  ```
 - **Get User By Username**
-- ```http
+  ```http
   GET /api/username/{username}
+  ```
 
 - **Update User By ID**
-- ```http
-  PUT /api/users/{userId}
-
+  ```http
+    PUT /api/users/{userId}
+  ```
 - **Delete User By ID**
-- ```http
-  DELETE /api/users/{userId}
-
+  ```http
+    DELETE /api/users/{userId}
+  ```
 ##  Getting Started
 
 To get a local copy of the project up and running, follow this step
